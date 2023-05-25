@@ -1,0 +1,37 @@
+.incr-decr,
+.remove {
+  font-size: 20px;
+}
+
+.remove {
+  border: 0;
+  border-top: 1px solid rgb(212, 212, 213);
+}
+
+.remove:hover,
+.incr-decr button:hover {
+  background-color: rgb(194, 194, 211);
+}
+
+.incr-decr {
+  display: flex;
+  border-top: 1px solid rgb(212, 212, 213);
+}
+
+.incr-decr span {
+  flex: 1;
+  text-align: center;
+}
+
+.incr-decr button {
+  flex: 0.5;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 1px solid rgb(212, 212, 213);
+  border-right: 1px solid rgb(212, 212, 213);
+}
+
+.cart-c {
+  text-align: center;
+  margin-top: 150px;
+}
