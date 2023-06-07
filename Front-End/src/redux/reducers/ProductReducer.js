@@ -9,6 +9,9 @@ const initialCartState = {
 const InitialCategorye = {
   category: [],
 };
+const initialName = {
+  name: "",
+};
 
 export const ProductReducer = (state = InitialState, { type, payload }) => {
   switch (type) {
@@ -68,6 +71,11 @@ export const cartReducer = (state = initialCartState, { type, payload }) => {
         ...state,
         cart: updatedCart.filter((product) => product.quantity > 0),
       };
+    case ActionTypes.CLEAR_CART:
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return state;
   }
@@ -77,6 +85,23 @@ export const CategoryReducer = (state = InitialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_CATEGORIES:
       return { ...state, category: payload };
+    default:
+      return state;
+  }
+};
+
+export const userReducer = (state = initialName, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.SET_USER:
+      return {
+        ...state,
+        name: payload,
+      };
+    case ActionTypes.CLEAR_USER:
+      return {
+        ...state,
+        name: "",
+      };
     default:
       return state;
   }

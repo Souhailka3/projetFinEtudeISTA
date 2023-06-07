@@ -5,22 +5,22 @@ import "./css/Header.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategories } from "../redux/actions/ProductAction";
+import { clearUser } from "../redux/actions/ProductAction";
 
 const Header = () => {
+  const userName = useSelector((state) => state.user.name);
   const [showCategories, setShowCategories] = useState(false);
-  const categories = useSelector((state) => state.allCategories.category); // change this to match your state
+  const categories = useSelector((state) => state.allCategories.category);
   const dispatch = useDispatch();
-  //
   const fetchCategories = async () => {
     const response = await axios
-      .get("http://127.0.0.1:8000/allCategories") // change this to match your PHP route
+      .get("http://127.0.0.1:8000/allCategories")
       .catch((err) => console.log("err", err));
     dispatch(setCategories(response.data));
   };
   useEffect(() => {
     fetchCategories();
   }, [dispatch]);
-  //
   const handleNavClick = () => {
     window.location.href = "http://localhost:8000/login";
   };
@@ -29,6 +29,11 @@ const Header = () => {
   };
   const handleCategoryMouseLeave = () => {
     setShowCategories(false);
+  };
+  const handleLogoutClick = () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      dispatch(clearUser());
+    }
   };
   return (
     <div className="ui fixed menu">
@@ -61,7 +66,7 @@ const Header = () => {
               {showCategories && (
                 <ul className="categories-list">
                   {categories.map((categorie) => {
-                    const { id_categorie, nom_categorie_categorie } = categorie; // change this to match your category properties
+                    const { id_categorie, nom_categorie_categorie } = categorie;
                     return (
                       <li key={id_categorie} s>
                         <Link to={`/categorie/${id_categorie}`} className="li">
@@ -74,9 +79,20 @@ const Header = () => {
               )}
             </p>
           </div>
-          <div className="nav-item" onClick={handleNavClick}>
-            <i className="user icon"></i>
-            <p>login</p>
+          <div>
+            {userName ? (
+              <div className="nav-item" onClick={handleLogoutClick}>
+                <i className="user icon"></i>
+                <p>{userName}</p>
+              </div>
+            ) : (
+              <Link to={"/login"}>
+                <div className="nav-item">
+                  <i className="user icon"></i>
+                  <p>login</p>
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </nav>

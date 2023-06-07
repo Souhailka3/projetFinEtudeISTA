@@ -27,6 +27,12 @@ export const removeFromCart = (productId) => {
   };
 };
 
+export const clearCart = () => {
+  return {
+    type: ActionTypes.CLEAR_CART,
+  };
+};
+
 export const increaseQuantity = (productId) => ({
   type: ActionTypes.INCREASE_QUANTITY,
   payload: productId,
@@ -43,3 +49,12 @@ export const setCategories = (categories) => {
     payload: categories,
   };
 };
+
+export const setUser = (name) => ({
+  type: ActionTypes.SET_USER,
+  payload: name,
+});
+
+export const clearUser = () => ({
+  type: ActionTypes.CLEAR_USER,
+});

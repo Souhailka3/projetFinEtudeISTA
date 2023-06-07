@@ -5,11 +5,14 @@ import {
   decreaseQuantity,
   increaseQuantity,
   removeFromCart,
+  clearCart,
 } from "../redux/actions/ProductAction";
 import "./css/CartPage.css";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const cartproducts = useSelector((state) => state.cart.cart);
+  const userName = useSelector((state) => state.user.name);
   const dispatch = useDispatch();
   const totalPrice = cartproducts.reduce(
     (total, product) => total + product.price * product.quantity,
@@ -43,7 +46,7 @@ const CartPage = () => {
                     <button onClick={() => dispatch(decreaseQuantity(id))}>
                       -
                     </button>
-                    <span>Quantity: {quantity}</span>
+                    <span className="sp">Quantity: {quantity}</span>
                     <button onClick={() => dispatch(increaseQuantity(id))}>
                       +
                     </button>
@@ -72,7 +75,20 @@ const CartPage = () => {
       ) : (
         <>
           {renderList}
-          <h3 className="cart-h">Total Price: ${totalPrice}</h3>
+          <div className="car">
+            <h3 className="cart-h">Total Price: ${totalPrice}</h3>
+            {userName ? (
+              <button
+                className="btncon" /* onClick={() => dispatch(clearCart())} */
+              >
+                <Link to={"/facture"} className="link">
+                  comfirm purchase
+                </Link>
+              </button>
+            ) : (
+              <p>Please log in to confirm your purchase.</p>
+            )}
+          </div>
         </>
       )}
     </>

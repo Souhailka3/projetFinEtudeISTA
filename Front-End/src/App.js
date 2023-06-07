@@ -4,12 +4,15 @@ import ProductListing from "./containers/ProductListing";
 import ProductDetails from "./containers/ProductDetails";
 import CartPage from "./containers/CartPage";
 import ProductsBycategory from "./containers/ProductsBycategory";
+import LoginPage from "./containers/login/login";
+import Facture from "./containers/facture/Facture";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<ProductListing />} />
           <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/cart" element={<CartPage />} />
@@ -17,7 +20,7 @@ function App() {
             path="/categorie/:categoryId"
             element={<ProductsBycategory />}
           />
-          <Route>404 Not Found!</Route>
+          <Route path="/facture" element={<Facture />} />
         </Routes>
       </BrowserRouter>
     </div>

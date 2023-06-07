@@ -2,6 +2,9 @@
 
 use App\Models\Categorie;
 use App\Models\Produit;
+use App\Models\Utilisateur;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +37,7 @@ Route::get('/allCategories', function () {
     return $categories;
 });
 
-Route::get('/categorie/{id}', function ($id) {
-    $categories = Categorie::with('produits')->find($id);
-    return $categories;
+Route::get('/users', function () {
+    $users = Utilisateur::all();
+    return response()->json($users);
 });

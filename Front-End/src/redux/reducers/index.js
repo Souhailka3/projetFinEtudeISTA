@@ -4,6 +4,7 @@ import {
   selectedProductReducer,
   cartReducer,
   CategoryReducer,
+  userReducer,
 } from "./ProductReducer";
 
 const reducers = combineReducers({
@@ -11,5 +12,6 @@ const reducers = combineReducers({
   product: selectedProductReducer,
   cart: cartReducer,
   allCategories: CategoryReducer,
+  user: userReducer,
 });
 export default reducers;
